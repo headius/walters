@@ -1,5 +1,5 @@
 require 'xni/compile_task'
 
 XNI::CompileTask.new('walters') do |t|
-  t.export File.expand_path('../lib/walters.rb')
+  t.export File.expand_path('../lib/walters/walters_xni.rb')
 end

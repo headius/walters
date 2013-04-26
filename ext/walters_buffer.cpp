@@ -6,7 +6,7 @@ extern "C" {
   #include "houdini/houdini.h"
 }
 
-#include "walters.h"
+#include "walters_xni.h"
 
 struct Walters_Buffer {
     gh_buf gh;
