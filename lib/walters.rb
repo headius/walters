@@ -23,55 +23,66 @@ module Walters
     native :escape_js, [ :cstring, :uint], :bool
     native :unescape_js, [ :cstring, :uint], :bool
   end
+
+  native :free_cstring, [ :pointer ], :void
+  native :read_cstring, [ :pointer ], :cstring
+  native :_escape_html, [ :cstring, :uint, :bool], :pointer
+  native :_unescape_html, [ :cstring, :uint], :pointer
+  native :_escape_xml, [ :cstring, :uint], :pointer
+  native :_escape_uri, [ :cstring, :uint], :pointer
+  native :_escape_url, [ :cstring, :uint], :pointer
+  native :_escape_href, [ :cstring, :uint], :pointer
+  native :_unescape_uri, [ :cstring, :uint], :pointer
+  native :_unescape_url, [ :cstring, :uint], :pointer
+  native :_escape_js, [ :cstring, :uint], :pointer
+  native :_unescape_js, [ :cstring, :uint], :pointer
   
   class << self
     private
-    def buf_op(src)
-      XNI::AutoReleasePool.new do
-        buf = Buffer.autorelease.new(0)
-        result = yield(buf) if block_given?
-        result ? buf.cstring : src
-      end
+    def cstring(ptr, str)
+      ptr ? read_cstring(ptr) : str
+    ensure
+      free_cstring(ptr) if ptr
     end
   end
   
   def self.escape_html(src, secure = true)
-    buf_op(src) { |buf| puts "buf=#{buf}"; buf.escape_html0(src, src.length, secure) }
+    cstring _escape_html(src, src.length, secure), src
   end
   
   def self.unescape_html(src)
-    buf_op(src) { |buf| buf.unescape_html(src, src.length) }
+    cstring _unescape_html(src, src.length), src
   end
 
   def self.escape_xml(src)
-    buf_op(src) { |buf| buf.escape_xml(src, src.length) }
+    cstring _escape_xml(src, src.length, secure), src
   end
 
   def self.escape_uri(src)
-    buf_op(src) { |buf| buf.escape_uri(src, src.length) }
+    cstring _escape_uri(src, src.length, secure), src
   end
 
   def self.escape_url(src)
-    buf_op(src) { |buf| buf.escape_url(src, src.length) }
+    cstring _escape_url(src, src.length, secure), src
   end
   
   def self.escape_href(src)
-    buf_op(src) { |buf| buf.escape_href(src, src.length) }
+    cstring _escape_href(src, src.length, secure), src
   end
   
   def self.unescape_uri(src)
-    buf_op(src) { |buf| buf.unescape_uri(src, src.length) }
+    cstring _unescape_uri(src, src.length), src
   end
   
   def self.unescape_url(src)
-    buf_op(src) { |buf| buf.unescape_url(src, src.length) }
+    cstring _unescape_url(src, src.length), src
   end
   
   def self.escape_js(src)
-    buf_op(src) { |buf| buf.escape_js(src, src.length) }
+    cstring _escape_js(src, src.length, secure), src
   end
   
   def self.unescape_js(src)
-    buf_op(src) { |buf| buf.unescape_js(src, src.length) }
+    cstring _unescape_js(src, src.length), src
   end
 end
