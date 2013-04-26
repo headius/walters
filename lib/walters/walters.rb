@@ -39,9 +39,14 @@ module Walters
   class << self
     private
     def cstring(ptr, str)
-      ptr ? read_cstring(ptr) : str
-    ensure
-      free_cstring(ptr) if ptr
+      if ptr
+        begin
+          str = read_cstring(ptr)
+        ensure
+          free_cstring(ptr)
+        end
+      end
+      str
     end
   end
 
