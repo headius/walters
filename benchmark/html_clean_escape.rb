@@ -20,7 +20,7 @@ module HamlBench
   extend Haml::Helpers
 end
 
-times = 10_000_000
+times = 1000_000
 url = "http://en.wikipedia.org/wiki/Line_of_succession_to_the_British_throne"
 html = ((('a'..'z').to_a.join('') + ('A'..'Z').to_a.join('')) * 100)[0...1000]
 html = html.force_encoding('utf-8') if html.respond_to?(:force_encoding)
