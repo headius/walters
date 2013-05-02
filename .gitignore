@@ -18,3 +18,6 @@ core
 *x86_64-darwin*
 __xni*.cpp
 *.o
+/jruby-ext/lib
+*.jar
+
