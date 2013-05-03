@@ -20,8 +20,8 @@ if defined?(JRUBY_VERSION)
   CLEAN.include 'pkg/classes'
 
   desc 'Compile the JRuby extension'
-  task :compile => FileList['pkg/classes', 'jruby-ext/src/**/*.java'] do |t|
-    ant.javac :srcdir => 'jruby-ext/src', :destdir => t.prerequisites.first,
+  task :compile => FileList['pkg/classes', 'jruby-ext/src/main/java/**/*.java'] do |t|
+    ant.javac :srcdir => 'jruby-ext/src/main/java', :destdir => t.prerequisites.first,
               :source => '1.6', :target => '1.6', :debug => true, :includeantruntime => false,
               :classpath => '${java.class.path}:${sun.boot.class.path}'
   end
