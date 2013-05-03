@@ -19,5 +19,6 @@ core
 __xni*.cpp
 *.o
 /jruby-ext/lib
+/jruby-ext/target
 *.jar
 

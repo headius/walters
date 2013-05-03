@@ -1,5 +1,5 @@
 # This file contains code based on the EscapeUtils project.  See the file LICENSE-EscapeUtils.txt for details.
-require_relative 'html_safety'
+require 'walters/html/html_safety'
 
 class ERB
   module Util
