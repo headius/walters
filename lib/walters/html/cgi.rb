@@ -1,7 +1,7 @@
 # This file contains code based on the EscapeUtils project.  See the file LICENSE-EscapeUtils.txt for details.
 require 'walters/html/html_safety'
 
-module CGI
+class CGI
   extend ::Walters::HtmlSafety
   extend ::Walters::HtmlUnescape
 
