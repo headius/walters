@@ -19,6 +19,9 @@
 package walters;
 
 import org.jcodings.Encoding;
+import org.jcodings.specific.ASCIIEncoding;
+import org.jcodings.specific.USASCIIEncoding;
+import org.jcodings.specific.UTF8Encoding;
 import org.jruby.RubyString;
 import org.jruby.anno.JRubyMethod;
 import org.jruby.runtime.ThreadContext;
@@ -30,8 +33,8 @@ public final class Walters {
     private static IRubyObject transform(ThreadContext context, IRubyObject cstr, TextTransformer transformer) {
         RubyString str = cstr.convertToString();
         Encoding encoding = str.getEncoding();
-        if (!Util.UTF8_ENCODING.equals(encoding)) {
-            throw context.getRuntime().newEncodingCompatibilityError("expected UTF-8 string");
+        if (!UTF8Encoding.INSTANCE.equals(encoding) && !USASCIIEncoding.INSTANCE.equals(encoding) && !ASCIIEncoding.INSTANCE.equals(encoding)) {
+            throw context.getRuntime().newEncodingCompatibilityError("expected UTF-8 or ASCII string");
         }
         
         ByteList src = str.getByteList();

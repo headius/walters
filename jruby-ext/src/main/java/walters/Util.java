@@ -18,9 +18,6 @@
 
 package walters;
 
-import org.jcodings.Encoding;
-import org.jruby.RubyString;
-import org.jruby.runtime.builtin.IRubyObject;
 import org.jruby.util.ByteList;
 
 import java.nio.charset.Charset;
@@ -31,7 +28,6 @@ import static walters.AsciiCharacters.*;
 public final class Util {
     private Util() {
     }
-    public static final Encoding UTF8_ENCODING = Encoding.load("UTF8");
     public static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
     static final byte[] HEX_CHARS = bytes("0123456789ABCDEF");
 
