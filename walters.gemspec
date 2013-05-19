@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.description = 'JRuby wrapper for Houdini html escaping library'
   s.files = %w(walters.gemspec LICENSE README.md Rakefile)
   s.files += Dir['lib/**/*.rb', 'xni-ext/**/*.{c,cpp,h}', '{spec,libtest}/**/*.{c,cpp,h,rb}']
+  s.files += [ 'lib/walters/walters_ext.jar' ]
   s.has_rdoc = false
   s.license = 'Apache 2.0'
   s.required_ruby_version = '>= 1.9.3'
