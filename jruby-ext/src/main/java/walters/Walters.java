@@ -31,7 +31,7 @@ import org.jruby.util.ByteList;
 public final class Walters {
 
     private static IRubyObject transform(ThreadContext context, IRubyObject cstr, TextTransformer transformer) {
-        RubyString str = cstr.convertToString();
+        RubyString str = cstr.asString();
         Encoding encoding = str.getEncoding();
         if (!UTF8Encoding.INSTANCE.equals(encoding) && !USASCIIEncoding.INSTANCE.equals(encoding) && !ASCIIEncoding.INSTANCE.equals(encoding)) {
             throw context.getRuntime().newEncodingCompatibilityError("expected UTF-8 or ASCII string");
@@ -40,7 +40,7 @@ public final class Walters {
         ByteList src = str.getByteList();
         ByteList ob = transformer.transform(src.getUnsafeBytes(), src.begin(), src.length());
         if (ob == null) {
-            return cstr;
+            return str;
         }
         RubyString result = RubyString.newStringNoCopy(context.getRuntime(), ob);
         result.setEncoding(str.getEncoding());

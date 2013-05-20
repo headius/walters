@@ -55,4 +55,8 @@ describe 'html escape' do
     str = '<b>Bourbon & Branch</b>'.encode('utf-8')
     Walters.escape_html(str).encoding.should == str.encoding
   end
+
+  it 'symbols' do
+    Walters.escape_html(:some_symbol).should == 'some_symbol'
+  end
 end
